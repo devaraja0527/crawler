@@ -45,8 +45,8 @@ public class CrawlerController {
 			
 			if(!connection.response().contentType().contains("text/html")) {
 	                System.out.println("Retrieved something other than HTML");
-	                finalObjectReturn.put("status",HttpStatus.SERVICE_UNAVAILABLE);
-	            	finalObjectReturn.put("code",HttpStatus.SERVICE_UNAVAILABLE.toString());
+	                finalObjectReturn.put("status",HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase());
+	            	finalObjectReturn.put("code",HttpStatus.SERVICE_UNAVAILABLE.value());
 	            	finalObjectReturn.put("message","Retrieved something other than HTML..!");
 	            	return  finalObjectReturn.toJSONString();
 	         }
@@ -65,7 +65,7 @@ public class CrawlerController {
 	    	finalObjectReturn.put("links",arrayOfLinks);
 			return finalObjectReturn.toJSONString();
 	    	
-        } catch(IOException ioe) {
+        } catch(Exception ioe) {
         	ioe.printStackTrace();
         	finalObjectReturn.put("status",HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase());
         	finalObjectReturn.put("code",HttpStatus.SERVICE_UNAVAILABLE.value());
@@ -99,7 +99,7 @@ public class CrawlerController {
 		    	finalObjectReturn.put("code",HttpStatus.NOT_FOUND.value());
 		    	finalObjectReturn.put("message","Search word not found with in the page Limit..!");
 			}
-		} catch (IOException ioe) {
+		} catch (Exception ioe) {
 			ioe.printStackTrace();
         	finalObjectReturn.put("status",HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase());
         	finalObjectReturn.put("code",HttpStatus.SERVICE_UNAVAILABLE.value());
