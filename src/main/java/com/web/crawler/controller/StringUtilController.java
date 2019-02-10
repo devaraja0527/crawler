@@ -16,7 +16,7 @@ public class StringUtilController {
 		JSONObject finalObjectReturn = new JSONObject();
 		 char foundChar = getNonRepeateChar(inputString);
 		 if (foundChar != 0) {
-			 finalObjectReturn.put("foundChar", foundChar);
+			 finalObjectReturn.put("foundChar", String.valueOf(foundChar));
 		 } else {
 			 finalObjectReturn.put("nocharFound", "No Charected Found...!");
 		 }

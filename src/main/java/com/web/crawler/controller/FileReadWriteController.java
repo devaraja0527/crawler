@@ -86,7 +86,6 @@ public class FileReadWriteController {
             e.printStackTrace();
             return false;
         }finally{
-            //close resources
             try {
                 fr.close();
                 return true;

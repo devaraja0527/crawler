@@ -22,20 +22,25 @@ import org.json.simple.parser.ParseException;
 
 @RestController
 public class ProductsController {
-	
+
       @Autowired
       ProductsService productsService;
-	
+
+	ProductsController(final ProductsService productsService) {
+		this.productsService = productsService;
+	}
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/products/{id}/{name}", method = RequestMethod.GET)
 	public String getProducts(
-			@PathVariable(value = "id", required = false) String id, 
+			@PathVariable(value = "id", required = false) String id,
 			@PathVariable(value = "name", required = false) String name) {
-		
-		
+
+
 		JSONObject finalObjectReturn = new JSONObject();
-		
+
 		Response response = productsService.getProductDetails(id, name);
+		System.out.println(response);
 		finalObjectReturn.put("status", response.getStatus().toString());
 		finalObjectReturn.put("code",response.getCode());
 		if (response.hasErrors()) {
@@ -45,8 +50,8 @@ public class ProductsController {
 		}
 		return finalObjectReturn.toString();
 	}
-	
-	
+
+
 	@SuppressWarnings("unchecked")
 	private JSONArray getErrorsInJson(final List<Error> errorsList) {
 		JSONArray array = new JSONArray();
@@ -58,6 +63,6 @@ public class ProductsController {
 		}
 		return array;
 	}
-	
-	
+
+
 }
